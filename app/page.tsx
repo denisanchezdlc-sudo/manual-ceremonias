@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
@@ -129,6 +130,32 @@ const faqItems = [
 
 export default function Home() {
   
+  // ==========================================
+  // LÓGICA DEL CRONÓMETRO DE URGENCIA
+  // ==========================================
+  
+  // Aquí ajustas el tiempo. Ejemplo: 2 horas (2 * 60 * 60)
+  const [timeLeft, setTimeLeft] = useState(2 * 60 * 60); 
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    // 1. Calculamos las horas (3600 segundos = 1 hora)
+    const h = Math.floor(seconds / 3600);
+    // 2. Calculamos los minutos restantes
+    const m = Math.floor((seconds % 3600) / 60);
+    // 3. Calculamos los segundos restantes
+    const s = seconds % 60;
+    
+    // 4. Retornamos el formato 00:00:00
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+  
   // Función para deslizar suavemente hacia la oferta
   const scrollToCheckout = () => {
     const checkoutSection = document.getElementById("checkout-section");
@@ -138,7 +165,51 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen text-neutral-900 font-sans selection:bg-[#d4af37] selection:text-black relative overflow-x-hidden">
+    <main className="min-h-screen text-neutral-900 font-sans selection:bg-[#d4af37] selection:text-black relative overflow-x-hidden pt-[100px] md:pt-28">
+      
+      {/* ========================================== */}
+      {/* CRONÓMETRO FIJO (ESTILO CAPTURA MÓVIL/PC)  */}
+      {/* ========================================== */}
+      <div className="fixed top-0 left-0 w-full z-[100]">
+        <motion.div 
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="bg-[#FCF7EF]/95 backdrop-blur-xl border-b-2 border-[#d4af37]/80 shadow-[0_10px_20px_rgba(212,175,55,0.15)] w-full py-3 md:py-4"
+        >
+          {/* Redujimos un poco el gap en móvil (gap-2) para que todo se vea más unido */}
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 px-4">
+            
+            {/* ================= TEXTOS E ÍCONO ================= */}
+            <div className="flex items-center gap-3 md:gap-4">
+              
+              {/* Ícono de Reloj de Arena */}
+              <span className="text-3xl md:text-4xl animate-pulse drop-shadow-sm flex-shrink-0">
+                ⏳
+              </span>
+              
+              {/* Textos alineados a la izquierda para acompañar al ícono */}
+              <div className="flex flex-col items-start text-left">
+                <p className="text-neutral-950 font-black text-[15px] sm:text-xl md:text-2xl uppercase tracking-wider leading-none mb-1.5 md:mb-2">
+                  ¡Oferta a punto de expirar!
+                </p>
+                <p className="text-neutral-700 font-bold text-[13px] sm:text-sm md:text-base leading-none">
+                  Llévate todo el paquete por solo <span className="text-red-600 font-black">$32 USD</span>
+                </p>
+              </div>
+            </div>
+            
+            {/* ================= CRONÓMETRO ================= */}
+            {/* AJUSTE MÓVIL: px-4 py-1 (caja más pequeña) y text-2xl (números más moderados) */}
+            <div className="bg-neutral-950 px-4 py-1 md:px-8 md:py-2 rounded-xl md:rounded-2xl border border-[#d4af37]/30 shadow-[inset_0_2px_10px_rgba(0,0,0,1)] flex items-center justify-center flex-shrink-0">
+              <span className="font-black text-2xl md:text-4xl text-[#d4af37] tabular-nums tracking-widest drop-shadow-[0_0_8px_rgba(212,175,55,0.4)] leading-none mt-0.5">
+                {formatTime(timeLeft)}
+              </span>
+            </div>
+
+          </div>
+        </motion.div>
+      </div>
       
       {/* VIDEO DE FONDO GLOBAL Y FIJO */}
       <div className="fixed inset-0 w-full h-full z-[-2]">
