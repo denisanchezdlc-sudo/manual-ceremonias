@@ -220,12 +220,12 @@ export default function Home() {
           playsInline 
           className="w-full h-full object-cover"
         >
-          <source src="/hero-bg.mp4" type="video/mp4" />
+          <source src="/hero-bgg.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* OVERLAY GLOBAL */}
-      <div className="fixed inset-0 bg-[#FCF7EF]/85 backdrop-blur-md z-[-1]"></div>
+      {/* OVERLAY GLOBAL - Optimizado para claridad en móvil */}
+      <div className="fixed inset-0 bg-[#FCF7EF]/60 md:bg-[#FCF7EF]/85 backdrop-blur-sm md:backdrop-blur-md z-[-1]"></div>
 
       {/* ========================================== */}
       {/* 1. HERO SECTION - VERSIÓN ESCRITORIO (PC)  */}
