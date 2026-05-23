@@ -572,7 +572,7 @@ export default function Home() {
           <div className="p-12 w-3/5">
             <h2 className="text-3xl font-black mb-6 text-neutral-950 tracking-tight">¿Quién está detrás de este manual?</h2>
             <p className="text-neutral-800 mb-4 font-medium leading-relaxed text-base">
-              Hola, soy <strong className="text-neutral-950 font-black">Denis Sánchez</strong>. Durante más de 10 años he sostenido un micrófono frente a audiencias de todo tipo, desde bodas íntimas hasta eventos corporativos de 500 personas.
+              Hola, soy <strong className="text-neutral-950 font-black">Denis Sánchez</strong>. Durante más de 10 años he sostenido un micrófono frente a audiencias de todo tipo, desde bodas íntimas hasta eventos corporativos de +2000 personas.
             </p>
             <p className="text-neutral-800 mb-8 font-medium leading-relaxed text-base">
               He condensado mi experiencia, mis errores y mis mayores aciertos en este manual. Mi misión no es solo que "hables", sino que <span className="text-[#b08d28] font-black">conectes</span> y te sientas con la autoridad de un verdadero líder en el escenario.
@@ -583,7 +583,7 @@ export default function Home() {
                 <p className="text-xs text-neutral-600 font-bold uppercase tracking-widest mt-1">Años Exp.</p>
               </div>
               <div>
-                <p className="text-4xl font-black text-[#d4af37] drop-shadow-sm">500+</p>
+                <p className="text-4xl font-black text-[#d4af37] drop-shadow-sm">800+</p>
                 <p className="text-xs text-neutral-600 font-bold uppercase tracking-widest mt-1">Eventos</p>
               </div>
             </div>
